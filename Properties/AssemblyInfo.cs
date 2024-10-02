@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SELCAL Tone")]
-[assembly: AssemblyDescription("https://github.com/mrbreenhd/SELCAL-Tone")]
+[assembly: AssemblyTitle("vPilot-SELCAL")]
+[assembly: AssemblyDescription("https://github.com/mrbreenhd/vPilot-SELCAL")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Open Source")]
-[assembly: AssemblyProduct("SELCAL Tone")]
+[assembly: AssemblyProduct("vPilot-SELCAL")]
 [assembly: AssemblyCopyright("GNU GPL v3 License")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

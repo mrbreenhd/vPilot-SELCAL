@@ -7,8 +7,8 @@
     <ProjectGuid>{22722C7C-A26E-4BCA-BB97-442C958C7E5E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Selcal_Tone</RootNamespace>
-    <AssemblyName>Selcal-Tone</AssemblyName>
+    <RootNamespace>vPilotSELCAL</RootNamespace>
+    <AssemblyName>vPilot-SELCAL</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
