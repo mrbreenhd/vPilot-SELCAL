@@ -53,8 +53,7 @@ namespace SELCALTone {
         {
             sendDebug("Sending Tone for " + code);
             string path = Directory.GetCurrentDirectory();
-            string soundPath = path + "\\..\\Sounds\\SELCAL\\";
-
+            string soundPath = path + "\\Sounds\\SELCAL\\";
             try
             {
                 char[] characters = code.Replace("-", "").ToCharArray();
