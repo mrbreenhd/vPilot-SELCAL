@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using Microsoft.Win32;
 using NAudio.Wave;
 
 using RossCarlson.Vatsim.Vpilot.Plugins;
@@ -19,6 +20,7 @@ namespace SELCALTone {
         // Public variables
         public string connectedCallsign = null;
         public string connectedSelcal = null;
+        private string soundPath;
 
         // Settings        
         private static WaveStream audio1;
@@ -36,6 +38,10 @@ namespace SELCALTone {
         private static DirectSoundOut dsoA;
         private static DirectSoundOut dsoB;
 
+        private IniFile settingsFile;
+        private Boolean settingDebug = false;
+
+
         /*
          * 
          * Initilise the plugin
@@ -46,14 +52,19 @@ namespace SELCALTone {
             vPilot.NetworkConnected += onNetworkConnectedHandler;
             vPilot.NetworkDisconnected += onNetworkDisconnectedHandler;
             vPilot.SelcalAlertReceived += onSelcalAlertReceivedHandler;
+            loadSettings();
             sendDebug("Loading Sucessful");
+
+            if (settingDebug)
+            {
+                sendDebug("Debugging Enabled");
+                sendTone("AB-CD");
+            }            
         }
 
         public void sendTone(String code)
         {
             sendDebug("Sending Tone for " + code);
-            string path = Directory.GetCurrentDirectory();
-            string soundPath = path + "\\Sounds\\SELCAL\\";
             try
             {
                 char[] characters = code.Replace("-", "").ToCharArray();
@@ -117,6 +128,23 @@ namespace SELCALTone {
         private void onSelcalAlertReceivedHandler( object sender, SelcalAlertReceivedEventArgs e ) {
             sendTone(connectedSelcal);
             sendDebug("Received SELCAL Sending Tone");
+        }
+
+        private void loadSettings()
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("Software\\vPilot");
+            if (registryKey != null)
+            {
+                string vPilotPath = (string)registryKey.GetValue("Install_Dir");
+                string configFile = vPilotPath + "\\Plugins\\vPilot-SELCAL.ini";
+                soundPath = Path.Combine(vPilotPath, "Sounds", "SELCAL\\");
+                settingsFile = new IniFile(configFile);
+                settingDebug = settingsFile.KeyExists("Enabled", "DEBUG") ? Boolean.Parse(settingsFile.Read("Enabled", "DEBUG")) : false;
+            }
+            else
+            {
+                sendDebug("I canny find a registery");
+            }
         }
     }
 }
